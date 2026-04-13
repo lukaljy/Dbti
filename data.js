@@ -77,6 +77,396 @@
           effects: { evidenceDependence: 36, reviewCompulsion: 24, logicPurity: 16, expressionImpact: -8 }
         }
       ]
+    },
+    {
+      id: "q002",
+      text: "赛前讨论到凌晨，大家还在吵核心标准，你最可能先做什么？",
+      options: [
+        {
+          label: "A",
+          text: "把所有人的话收成三层框架：定义、标准、比较，不然今晚谁也别睡。",
+          effects: { frameworkModeling: 34, battlefieldControl: 20, criterionSensitivity: 18, memeDensity: -8 }
+        },
+        {
+          label: "B",
+          text: "先去找判例、论文、统计口径。没有材料支撑的灵感一律先别上桌。",
+          effects: { evidenceDependence: 36, reviewCompulsion: 16, logicPurity: 14, expressionImpact: -8 }
+        },
+        {
+          label: "C",
+          text: "让大家各讲一分钟，先判断谁的方向能被评委听懂，再决定怎么收。",
+          effects: { teammateRelay: 26, criterionSensitivity: 24, battlefieldControl: 18, emotionSpike: -10 }
+        },
+        {
+          label: "D",
+          text: "先抛一个能让全队醒过来的暴论。哪怕最后不用，也要把空气搅动起来。",
+          effects: { punchlineImpulse: 28, memeDensity: 22, riskPreference: 20, frameworkModeling: -10 }
+        }
+      ]
+    },
+    {
+      id: "q003",
+      text: "队友在场上打出一个明显有坑的点，而且对方已经准备追了，你会：",
+      options: [
+        {
+          label: "A",
+          text: "马上接线，把它改造成一个较弱但能站住的版本，先保住队伍战场。",
+          effects: { teammateRelay: 36, defensiveDissection: 24, battlefieldControl: 18, attackPressure: -8 }
+        },
+        {
+          label: "B",
+          text: "直接转火对方更大的漏洞，用进攻把这个坑从评委注意力里冲掉。",
+          effects: { attackPressure: 34, impromptuCounter: 26, riskPreference: 20, teammateRelay: -8 }
+        },
+        {
+          label: "C",
+          text: "承认这个点不是主战场，立刻把评委拉回更关键的比较标准。",
+          effects: { criterionSensitivity: 34, frameworkModeling: 24, emotionSpike: -14, riskPreference: -8 }
+        },
+        {
+          label: "D",
+          text: "赛后一定复盘，但场上先记下来，等对面真的追深了再精准拆弹。",
+          effects: { reviewCompulsion: 24, defensiveDissection: 28, logicPurity: 18, emotionSpike: -12 }
+        }
+      ]
+    },
+    {
+      id: "q004",
+      text: "如果你负责结辩，最想把最后三分钟用来做什么？",
+      options: [
+        {
+          label: "A",
+          text: "把全场争点重新编号，告诉评委每个点为什么都导向我方。",
+          effects: { battlefieldControl: 36, frameworkModeling: 24, criterionSensitivity: 16, memeDensity: -8 }
+        },
+        {
+          label: "B",
+          text: "把最重要的价值差异抬出来，让这场比赛看起来像一个时代选择。",
+          effects: { expressionImpact: 32, punchlineImpulse: 22, frameworkModeling: 18, evidenceDependence: -8 }
+        },
+        {
+          label: "C",
+          text: "补一组对方没处理干净的数据和例子，让他们最后也不能安全落地。",
+          effects: { evidenceDependence: 30, attackPressure: 20, reviewCompulsion: 16, expressionImpact: -6 }
+        },
+        {
+          label: "D",
+          text: "用一句能被记住的话收尾。赢不赢先放一边，赛后传播点必须有。",
+          effects: { punchlineImpulse: 34, memeDensity: 28, expressionImpact: 20, logicPurity: -10 }
+        }
+      ]
+    },
+    {
+      id: "q005",
+      text: "对方质询突然问到你准备稿里没有的一环，你第一反应是：",
+      options: [
+        {
+          label: "A",
+          text: "先稳住概念范围，把问题拆成两个小问题，再逐个回应。",
+          effects: { defensiveDissection: 34, logicPurity: 26, emotionSpike: -16, riskPreference: -8 }
+        },
+        {
+          label: "B",
+          text: "反问对方预设，把问题的危险性倒回他们自己的标准里。",
+          effects: { impromptuCounter: 34, attackPressure: 26, criterionSensitivity: 16, riskPreference: 12 }
+        },
+        {
+          label: "C",
+          text: "快速看队友反应，能接就让队友接，不能接就先缩小承诺。",
+          effects: { teammateRelay: 34, battlefieldControl: 18, defensiveDissection: 16, attackPressure: -8 }
+        },
+        {
+          label: "D",
+          text: "先用气势顶住，争取让这个问题看起来没有它听上去那么致命。",
+          effects: { expressionImpact: 28, riskPreference: 24, emotionSpike: 20, logicPurity: -12 }
+        }
+      ]
+    },
+    {
+      id: "q006",
+      text: "你最喜欢拿到哪种准备任务？",
+      options: [
+        {
+          label: "A",
+          text: "写一辩稿。把定义、标准、框架和论点顺序排得干干净净。",
+          effects: { frameworkModeling: 36, logicPurity: 22, riskPreference: -14, punchlineImpulse: -6 }
+        },
+        {
+          label: "B",
+          text: "做资料包。案例越多越安心，最好还能按用途贴好标签。",
+          effects: { evidenceDependence: 38, reviewCompulsion: 22, teammateRelay: 12, expressionImpact: -8 }
+        },
+        {
+          label: "C",
+          text: "模拟自由辩。先把所有可能炸场的问法都拿出来试一遍。",
+          effects: { attackPressure: 28, impromptuCounter: 28, riskPreference: 18, emotionSpike: 12 }
+        },
+        {
+          label: "D",
+          text: "做评委视角预判。哪些点会被买，哪些点听起来像自嗨，要先分清楚。",
+          effects: { criterionSensitivity: 36, battlefieldControl: 20, frameworkModeling: 16, memeDensity: -8 }
+        }
+      ]
+    },
+    {
+      id: "q007",
+      text: "遇到一个很容易煽动情绪的辩题，你会怎么处理？",
+      options: [
+        {
+          label: "A",
+          text: "情绪可以有，但必须服务比较。先把价值冲突放进清楚的标准里。",
+          effects: { criterionSensitivity: 28, frameworkModeling: 26, expressionImpact: 16, emotionSpike: -10 }
+        },
+        {
+          label: "B",
+          text: "找到最能打动人的叙事入口，把评委带进我方的价值现场。",
+          effects: { expressionImpact: 36, punchlineImpulse: 18, riskPreference: 10, evidenceDependence: -8 }
+        },
+        {
+          label: "C",
+          text: "先查数据，情绪题最怕只剩情绪，必须把现实支点钉住。",
+          effects: { evidenceDependence: 34, logicPurity: 20, reviewCompulsion: 12, punchlineImpulse: -8 }
+        },
+        {
+          label: "D",
+          text: "直接拆对方煽情里的偷换：感动归感动，比较归比较。",
+          effects: { attackPressure: 28, defensiveDissection: 26, logicPurity: 18, expressionImpact: -6 }
+        }
+      ]
+    },
+    {
+      id: "q008",
+      text: "赛前最后一小时，你发现一个核心资料可能有口径问题，你会：",
+      options: [
+        {
+          label: "A",
+          text: "立刻停用，宁可少一个例子，也不要让对方抓住把柄。",
+          effects: { logicPurity: 34, defensiveDissection: 22, riskPreference: -20, winObsession: 8 }
+        },
+        {
+          label: "B",
+          text: "保留，但改成更保守的表述，只支撑小结论，不支撑主结论。",
+          effects: { criterionSensitivity: 26, frameworkModeling: 18, defensiveDissection: 18, riskPreference: -6 }
+        },
+        {
+          label: "C",
+          text: "继续用。只要对方没查到，它仍然是场上的有效武器。",
+          effects: { riskPreference: 34, winObsession: 24, attackPressure: 14, logicPurity: -24 }
+        },
+        {
+          label: "D",
+          text: "马上找替代资料，并把这次事故记进赛后复盘清单。",
+          effects: { evidenceDependence: 28, reviewCompulsion: 30, teammateRelay: 12, emotionSpike: -8 }
+        }
+      ]
+    },
+    {
+      id: "q009",
+      text: "队伍准备采用一个高风险但可能很亮眼的奇袭打法，你的态度是：",
+      options: [
+        {
+          label: "A",
+          text: "可以打，但必须先设计撤退路线。奇袭不是裸奔。",
+          effects: { battlefieldControl: 28, riskPreference: 18, criterionSensitivity: 18, emotionSpike: -8 }
+        },
+        {
+          label: "B",
+          text: "打，必须打。常规打法赢不了就别装稳了。",
+          effects: { riskPreference: 38, winObsession: 28, attackPressure: 20, defensiveDissection: -10 }
+        },
+        {
+          label: "C",
+          text: "先问评委能不能买。如果评委不吃，再好看也只是自嗨。",
+          effects: { criterionSensitivity: 36, frameworkModeling: 18, riskPreference: -14, punchlineImpulse: -8 }
+        },
+        {
+          label: "D",
+          text: "我负责把它包装得像正经战术，至少不要让队友看起来像临时发疯。",
+          effects: { teammateRelay: 26, expressionImpact: 24, memeDensity: 14, battlefieldControl: 12 }
+        }
+      ]
+    },
+    {
+      id: "q010",
+      text: "评委点评说“你们回应不够”，但你觉得明明回应了，你会：",
+      options: [
+        {
+          label: "A",
+          text: "复盘录像，找出是哪一层回应没有被评委识别出来。",
+          effects: { reviewCompulsion: 36, criterionSensitivity: 24, logicPurity: 16, emotionSpike: -8 }
+        },
+        {
+          label: "B",
+          text: "下次直接把回应标签打在评委脸上：第一，回应；第二，比较；第三，影响。",
+          effects: { frameworkModeling: 28, expressionImpact: 20, battlefieldControl: 18, criterionSensitivity: 14 }
+        },
+        {
+          label: "C",
+          text: "先不服三分钟，然后承认可能是表达路径没铺好。",
+          effects: { emotionSpike: 24, expressionImpact: 18, reviewCompulsion: 18, logicPurity: 8 }
+        },
+        {
+          label: "D",
+          text: "把这条点评转发给全队，提醒大家以后别只在心里回应。",
+          effects: { teammateRelay: 28, battlefieldControl: 18, reviewCompulsion: 16, memeDensity: 8 }
+        }
+      ]
+    },
+    {
+      id: "q011",
+      text: "如果让你自由选择上场位置，你最自然的位置是：",
+      options: [
+        {
+          label: "A",
+          text: "一辩。给我结构和定义，我来把这场比赛摆正。",
+          effects: { frameworkModeling: 34, logicPurity: 18, riskPreference: -12, battlefieldControl: 12 }
+        },
+        {
+          label: "B",
+          text: "二辩或质询位。给我对面的人，我来拆。",
+          effects: { attackPressure: 34, defensiveDissection: 22, impromptuCounter: 16, emotionSpike: 10 }
+        },
+        {
+          label: "C",
+          text: "三辩或自由辩核心。战场乱起来，我反而更清醒。",
+          effects: { impromptuCounter: 34, riskPreference: 24, attackPressure: 16, teammateRelay: -8 }
+        },
+        {
+          label: "D",
+          text: "四辩。前面打成什么样都行，最后给我三分钟收账。",
+          effects: { battlefieldControl: 34, criterionSensitivity: 22, expressionImpact: 20, reviewCompulsion: 10 }
+        }
+      ]
+    },
+    {
+      id: "q012",
+      text: "自由辩突然安静了两秒，空气开始变得尴尬，你会：",
+      options: [
+        {
+          label: "A",
+          text: "马上站起来补一问，哪怕不是最优，也不能让节奏死掉。",
+          effects: { impromptuCounter: 28, attackPressure: 24, riskPreference: 18, emotionSpike: 12 }
+        },
+        {
+          label: "B",
+          text: "把刚才没收束的战场接回来，提醒队友下一轮该往哪打。",
+          effects: { teammateRelay: 30, battlefieldControl: 24, defensiveDissection: 14, emotionSpike: -8 }
+        },
+        {
+          label: "C",
+          text: "宁可安静一秒，也不乱问。没有目标的问题只是在浪费时间。",
+          effects: { logicPurity: 28, criterionSensitivity: 18, riskPreference: -18, punchlineImpulse: -8 }
+        },
+        {
+          label: "D",
+          text: "抛一个能把全场注意力拉回来的尖锐表述，先把气口抢回来。",
+          effects: { expressionImpact: 30, punchlineImpulse: 24, memeDensity: 16, riskPreference: 10 }
+        }
+      ]
+    },
+    {
+      id: "q013",
+      text: "比赛输了，赛后你最可能先说什么？",
+      options: [
+        {
+          label: "A",
+          text: "第二轮质询那里其实就已经崩了，我们逐分钟复盘。",
+          effects: { reviewCompulsion: 38, logicPurity: 18, winObsession: 16, memeDensity: -8 }
+        },
+        {
+          label: "B",
+          text: "先别互相怪，大家把自己没接住的线列出来。",
+          effects: { teammateRelay: 32, battlefieldControl: 20, defensiveDissection: 14, emotionSpike: -12 }
+        },
+        {
+          label: "C",
+          text: "这个评委的判准其实能理解，我们没有把比较递到位。",
+          effects: { criterionSensitivity: 30, frameworkModeling: 18, reviewCompulsion: 16, emotionSpike: -8 }
+        },
+        {
+          label: "D",
+          text: "先让我发个朋友圈阴阳一下，五分钟后回来复盘。",
+          effects: { memeDensity: 30, emotionSpike: 22, punchlineImpulse: 18, reviewCompulsion: 8 }
+        }
+      ]
+    },
+    {
+      id: "q014",
+      text: "遇到明显强于自己的对手，你的备赛策略会变成：",
+      options: [
+        {
+          label: "A",
+          text: "把他们常用打法扒一遍，准备针对性资料和预设回应。",
+          effects: { evidenceDependence: 30, reviewCompulsion: 24, defensiveDissection: 18, winObsession: 14 }
+        },
+        {
+          label: "B",
+          text: "赌一套他们没见过的切入角度。常规对轰大概率打不过。",
+          effects: { riskPreference: 34, frameworkModeling: 18, attackPressure: 18, winObsession: 18 }
+        },
+        {
+          label: "C",
+          text: "压低失误率，所有争点都守住，逼他们自己犯错。",
+          effects: { defensiveDissection: 32, logicPurity: 22, emotionSpike: -16, riskPreference: -12 }
+        },
+        {
+          label: "D",
+          text: "把表达和价值讲到极致，至少让评委知道我们不是来陪跑的。",
+          effects: { expressionImpact: 34, punchlineImpulse: 18, winObsession: 20, evidenceDependence: -6 }
+        }
+      ]
+    },
+    {
+      id: "q015",
+      text: "比赛当天，队友突然开始焦虑，你通常会：",
+      options: [
+        {
+          label: "A",
+          text: "把流程、分工和重点再过一遍，用秩序感把大家按回座位。",
+          effects: { battlefieldControl: 28, teammateRelay: 24, frameworkModeling: 16, emotionSpike: -12 }
+        },
+        {
+          label: "B",
+          text: "提醒大家这场必须拿下，焦虑可以有，但别影响执行。",
+          effects: { winObsession: 32, battlefieldControl: 16, expressionImpact: 12, emotionSpike: 8 }
+        },
+        {
+          label: "C",
+          text: "讲点烂梗缓一下气氛，让队伍至少先像个人类组织。",
+          effects: { memeDensity: 30, teammateRelay: 20, punchlineImpulse: 16, winObsession: -8 }
+        },
+        {
+          label: "D",
+          text: "自己找个角落再看一遍资料。别人焦虑的时候，我更想确认底牌。",
+          effects: { evidenceDependence: 28, logicPurity: 16, teammateRelay: -10, emotionSpike: -6 }
+        }
+      ]
+    },
+    {
+      id: "q016",
+      text: "赛后如果要发一条总结，你最可能发什么？",
+      options: [
+        {
+          label: "A",
+          text: "感谢队友，今天几条线接得很舒服，下次继续补细节。",
+          effects: { teammateRelay: 30, reviewCompulsion: 16, expressionImpact: 12, emotionSpike: -8 }
+        },
+        {
+          label: "B",
+          text: "今天最关键的问题是判准没有打透，下一场必须重构比较。",
+          effects: { criterionSensitivity: 30, frameworkModeling: 22, reviewCompulsion: 18, memeDensity: -8 }
+        },
+        {
+          label: "C",
+          text: "附上三张资料截图和一句：别问，问就是还没查完。",
+          effects: { evidenceDependence: 30, memeDensity: 18, reviewCompulsion: 18, expressionImpact: 8 }
+        },
+        {
+          label: "D",
+          text: "发一条能让同赛区都看懂的抽象短句，懂的都懂。",
+          effects: { memeDensity: 36, punchlineImpulse: 24, expressionImpact: 14, logicPurity: -8 }
+        }
+      ]
     }
   ];
 

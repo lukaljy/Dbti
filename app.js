@@ -139,9 +139,14 @@
       });
     });
 
+    normalizeScores(scores);
+
     const matches = data.personalityTypes
       .map((type) => scoreTypeMatch(type, scores, touched))
-      .sort((a, b) => b.similarity - a.similarity);
+      .sort((a, b) => {
+        if (a.distance !== b.distance) return a.distance - b.distance;
+        return b.similarity - a.similarity;
+      });
 
     return {
       scores,
@@ -164,7 +169,15 @@
     });
 
     const similarity = Math.max(0, Math.round((1 - distance / weightTotal) * 100));
-    return { ...type, similarity };
+    return { ...type, distance, similarity };
+  }
+
+  function normalizeScores(scores) {
+    const mean = dimensionKeys.reduce((sum, key) => sum + scores[key], 0) / dimensionKeys.length;
+
+    dimensionKeys.forEach((key) => {
+      scores[key] = clamp(50 + (scores[key] - mean) * 1.45, 0, 100);
+    });
   }
 
   function computeDisplayScores(scores) {
