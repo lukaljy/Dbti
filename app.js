@@ -9,8 +9,7 @@
     currentQuestionIndex: 0,
     answers: {},
     selectedOptionIndex: null,
-    result: null,
-    tone: data.config.defaultTone
+    result: null
   };
 
   const $ = (selector) => document.querySelector(selector);
@@ -45,24 +44,8 @@
     elements.nextButton.addEventListener("click", goNext);
     elements.restartButton.addEventListener("click", restartTest);
     elements.copyButton.addEventListener("click", copyShareText);
-    document.querySelectorAll("[data-tone]").forEach((button) => {
-      button.addEventListener("click", () => setTone(button.dataset.tone));
-    });
-    updateToneButtons();
     window.addEventListener("resize", () => {
       if (state.result) drawRadarChart(state.result.displayScores);
-    });
-  }
-
-  function setTone(tone) {
-    state.tone = tone;
-    updateToneButtons();
-    if (state.result) renderResult(state.result);
-  }
-
-  function updateToneButtons() {
-    document.querySelectorAll("[data-tone]").forEach((button) => {
-      button.classList.toggle("is-active", button.dataset.tone === state.tone);
     });
   }
 
@@ -224,8 +207,8 @@
   function renderResult(result) {
     const primary = result.primary;
     const secondary = result.secondary;
-    const description = primary.copy[state.tone] || primary.copy.normal;
-    const shareText = primary.share[state.tone] || primary.share.normal;
+    const description = primary.copy.normal;
+    const shareText = primary.share.normal;
 
     elements.resultCode.textContent = primary.code;
     elements.resultName.textContent = primary.name;
@@ -237,7 +220,6 @@
       : "";
     elements.shareText.textContent = shareText;
     elements.copyButton.textContent = "复制分享文案";
-    updateToneButtons();
 
     elements.dimensionList.innerHTML = data.displayDimensions.map((dimension) => {
       const score = result.displayScores[dimension.key];

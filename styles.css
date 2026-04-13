@@ -226,8 +226,7 @@ h2 {
 
 .primary-button:hover:not(:disabled),
 .secondary-button:hover,
-.ghost-button:hover,
-.tone-button:hover {
+.ghost-button:hover {
   transform: translateY(-2px);
 }
 
@@ -403,6 +402,7 @@ h2 {
   color: rgba(244, 234, 215, 0.82);
   font-size: 17px;
   line-height: 1.9;
+  white-space: pre-line;
 }
 
 .match-box {
@@ -483,48 +483,6 @@ h2 {
   gap: 10px;
 }
 
-.tone-switch {
-  position: relative;
-  z-index: 1;
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-  margin: 0 0 22px;
-  border: 1px solid rgba(244, 234, 215, 0.18);
-  border-radius: 999px;
-  padding: 8px;
-  background: rgba(0, 0, 0, 0.18);
-}
-
-.tone-switch span {
-  padding: 0 8px;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.tone-button {
-  min-height: 32px;
-  border: 1px solid transparent;
-  border-radius: 999px;
-  padding: 0 12px;
-  color: rgba(244, 234, 215, 0.82);
-  background: transparent;
-  cursor: pointer;
-  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, color 180ms ease;
-}
-
-.tone-button.is-active {
-  border-color: rgba(255, 231, 122, 0.6);
-  color: #160f0b;
-  background: var(--yellow);
-}
-
-.tone-switch-result {
-  flex: 0 0 auto;
-  margin: 0;
-}
-
 .secondary-button {
   border: 1px solid rgba(255, 231, 122, 0.48);
   color: var(--yellow);
@@ -589,12 +547,7 @@ h2 {
   }
 
   .result-actions,
-  .result-actions button,
-  .tone-switch-result {
+  .result-actions button {
     width: 100%;
-  }
-
-  .tone-switch {
-    border-radius: 20px;
   }
 }
