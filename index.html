@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DBTI 华语辩论人格测试 Demo，测出你的辩论人格。">
+    <title>DBTI 华语辩论人格测试</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="data.js"></script>
+    <script defer src="app.js"></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="screen screen-start is-active" id="start-screen" aria-labelledby="start-title">
+        <div class="hero-panel">
+          <div class="status-strip">
+            <span>DBTI DEMO</span>
+            <span>1 QUESTION</span>
+            <span>16-DIM ENGINE</span>
+          </div>
+          <p class="eyebrow">华语辩论人格测试</p>
+          <h1 id="start-title">你在赛场上到底是什么东西？</h1>
+          <p class="hero-copy">
+            这是 DBTI 的最小可运行 Demo。当前只用 1 道题跑通流程，后续会扩展到 30 道常规题和完整人格库。
+          </p>
+          <div class="hero-stats" aria-label="测试规格">
+            <div><strong>16</strong><span>内部维度</span></div>
+            <div><strong>8</strong><span>展示维度</span></div>
+            <div><strong>3</strong><span>文案尺度</span></div>
+          </div>
+          <button class="primary-button" id="start-btn" type="button">进入赛场</button>
+        </div>
+      </section>
+
+      <section class="screen screen-quiz" id="quiz-screen" aria-labelledby="question-title">
+        <div class="quiz-card">
+          <header class="quiz-header">
+            <div>
+              <p class="eyebrow">当前辩题材料</p>
+              <h2 id="question-title">加载中</h2>
+            </div>
+            <div class="timer-badge" id="progress-count">01 / 01</div>
+          </header>
+          <div class="progress-track" aria-hidden="true">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+          <div class="question-copy" id="question-text"></div>
+          <div class="option-list" id="option-list"></div>
+          <footer class="quiz-footer">
+            <span class="hint-text" id="choice-hint">选择一个最像你的反应。</span>
+            <button class="primary-button" id="next-btn" type="button" disabled>查看结果</button>
+          </footer>
+        </div>
+      </section>
+
+      <section class="screen screen-result" id="result-screen" aria-labelledby="result-name">
+        <article class="result-card" id="result-card">
+          <div class="result-layout">
+            <section class="result-main">
+              <p class="eyebrow">赛后人格判决书</p>
+              <div class="result-code" id="result-code">DBTI</div>
+              <h2 id="result-name">加载中</h2>
+              <p class="result-tagline" id="result-tagline"></p>
+              <p class="result-desc" id="result-desc"></p>
+              <div class="match-box">
+                <span>匹配度</span>
+                <strong id="result-match">--%</strong>
+                <small id="result-secondary"></small>
+              </div>
+            </section>
+            <section class="radar-panel" aria-labelledby="radar-title">
+              <div class="section-label" id="radar-title">8 维赛场画像</div>
+              <canvas id="radar-chart" width="360" height="360"></canvas>
+              <div class="dimension-list" id="dimension-list"></div>
+            </section>
+          </div>
+          <section class="share-panel" aria-label="分享文案">
+            <div>
+              <div class="section-label">分享文案</div>
+              <p id="share-text"></p>
+            </div>
+            <div class="result-actions">
+              <button class="secondary-button" id="copy-btn" type="button">复制分享文案</button>
+              <button class="ghost-button" id="restart-btn" type="button">重新测试</button>
+            </div>
+          </section>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
