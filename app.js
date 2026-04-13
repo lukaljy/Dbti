@@ -1,13 +1,16 @@
 (() => {
   const data = window.DBTI_DATA;
-  const tone = data.config.defaultTone;
   const dimensionKeys = data.internalDimensions.map((dimension) => dimension.key);
+  const dimensionLabels = Object.fromEntries(
+    data.internalDimensions.map((dimension) => [dimension.key, dimension.label])
+  );
 
   const state = {
     currentQuestionIndex: 0,
     answers: {},
     selectedOptionIndex: null,
-    result: null
+    result: null,
+    tone: data.config.defaultTone
   };
 
   const $ = (selector) => document.querySelector(selector);
@@ -42,8 +45,24 @@
     elements.nextButton.addEventListener("click", goNext);
     elements.restartButton.addEventListener("click", restartTest);
     elements.copyButton.addEventListener("click", copyShareText);
+    document.querySelectorAll("[data-tone]").forEach((button) => {
+      button.addEventListener("click", () => setTone(button.dataset.tone));
+    });
+    updateToneButtons();
     window.addEventListener("resize", () => {
       if (state.result) drawRadarChart(state.result.displayScores);
+    });
+  }
+
+  function setTone(tone) {
+    state.tone = tone;
+    updateToneButtons();
+    if (state.result) renderResult(state.result);
+  }
+
+  function updateToneButtons() {
+    document.querySelectorAll("[data-tone]").forEach((button) => {
+      button.classList.toggle("is-active", button.dataset.tone === state.tone);
     });
   }
 
@@ -89,7 +108,10 @@
       return `
         <button class="option-button${selected}" type="button" data-option-index="${index}">
           <span class="option-label">${option.label}</span>
-          <span class="option-text">${option.text}</span>
+          <span class="option-content">
+            <span class="option-text">${option.text}</span>
+            <span class="score-chips">${renderEffectChips(option.effects)}</span>
+          </span>
         </button>
       `;
     }).join("");
@@ -199,8 +221,8 @@
   function renderResult(result) {
     const primary = result.primary;
     const secondary = result.secondary;
-    const description = primary.copy[tone] || primary.copy.normal;
-    const shareText = primary.share[tone] || primary.share.normal;
+    const description = primary.copy[state.tone] || primary.copy.normal;
+    const shareText = primary.share[state.tone] || primary.share.normal;
 
     elements.resultCode.textContent = primary.code;
     elements.resultName.textContent = primary.name;
@@ -212,6 +234,7 @@
       : "";
     elements.shareText.textContent = shareText;
     elements.copyButton.textContent = "复制分享文案";
+    updateToneButtons();
 
     elements.dimensionList.innerHTML = data.displayDimensions.map((dimension) => {
       const score = result.displayScores[dimension.key];
@@ -221,6 +244,14 @@
           <strong>${score}</strong>
         </div>
       `;
+    }).join("");
+  }
+
+  function renderEffectChips(effects) {
+    return Object.entries(effects).map(([key, value]) => {
+      const className = value >= 0 ? "score-chip is-positive" : "score-chip is-negative";
+      const sign = value >= 0 ? "+" : "";
+      return `<span class="${className}">${dimensionLabels[key] || key} ${sign}${value}</span>`;
     }).join("");
   }
 

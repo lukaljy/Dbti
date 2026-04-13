@@ -467,6 +467,370 @@
           effects: { memeDensity: 36, punchlineImpulse: 24, expressionImpact: 14, logicPurity: -8 }
         }
       ]
+    },
+    {
+      id: "q017",
+      text: "拿到一个特别抽象的价值辩题，你最先做的事是：",
+      options: [
+        {
+          label: "A",
+          text: "先把关键词定义拆开，防止整场比赛从第一秒开始飘。",
+          effects: { frameworkModeling: 32, logicPurity: 24, criterionSensitivity: 16, punchlineImpulse: -8 }
+        },
+        {
+          label: "B",
+          text: "找现实场景和具体人群，不然价值讨论很容易变成空中楼阁。",
+          effects: { evidenceDependence: 26, expressionImpact: 18, criterionSensitivity: 14, memeDensity: -6 }
+        },
+        {
+          label: "C",
+          text: "先写一段能把题目抬起来的开场，让评委知道这不是普通选择题。",
+          effects: { expressionImpact: 34, punchlineImpulse: 24, frameworkModeling: 12, evidenceDependence: -8 }
+        },
+        {
+          label: "D",
+          text: "直接问：这题到底哪边更容易赢？价值很美，但票很真实。",
+          effects: { winObsession: 32, criterionSensitivity: 24, riskPreference: 10, expressionImpact: -8 }
+        }
+      ]
+    },
+    {
+      id: "q018",
+      text: "对方疯狂堆案例，听起来每个都很惨，但比较关系很虚，你会：",
+      options: [
+        {
+          label: "A",
+          text: "抓住样本和归因问题，说明案例不是结论的自动提款机。",
+          effects: { logicPurity: 34, defensiveDissection: 26, evidenceDependence: 14, expressionImpact: -6 }
+        },
+        {
+          label: "B",
+          text: "直接追问比较标准：就算这些都是真的，为什么推出你方更优？",
+          effects: { attackPressure: 30, criterionSensitivity: 28, impromptuCounter: 16, emotionSpike: 8 }
+        },
+        {
+          label: "C",
+          text: "拿我方更能解释大趋势的数据压回去，让评委看全局不是看眼泪。",
+          effects: { evidenceDependence: 34, battlefieldControl: 20, winObsession: 12, punchlineImpulse: -6 }
+        },
+        {
+          label: "D",
+          text: "把对方煽情的地方转成一句能记住的反打，先把气势抢回来。",
+          effects: { expressionImpact: 30, punchlineImpulse: 24, memeDensity: 14, logicPurity: -8 }
+        }
+      ]
+    },
+    {
+      id: "q019",
+      text: "队友说你的稿子太长，可能念不完，你会：",
+      options: [
+        {
+          label: "A",
+          text: "删修辞，保链条。只要逻辑骨架在，肉少一点也能活。",
+          effects: { logicPurity: 30, frameworkModeling: 24, expressionImpact: -10, riskPreference: -8 }
+        },
+        {
+          label: "B",
+          text: "删资料，保关键例子。不要让评委在数据森林里迷路。",
+          effects: { criterionSensitivity: 24, battlefieldControl: 18, evidenceDependence: -10, expressionImpact: 10 }
+        },
+        {
+          label: "C",
+          text: "不删，练到能念完。速度也是一种战术。",
+          effects: { winObsession: 28, riskPreference: 24, evidenceDependence: 12, teammateRelay: -8 }
+        },
+        {
+          label: "D",
+          text: "让队友标出听不懂的地方，先保证他们能接上我的线。",
+          effects: { teammateRelay: 34, battlefieldControl: 18, reviewCompulsion: 14, frameworkModeling: 8 }
+        }
+      ]
+    },
+    {
+      id: "q020",
+      text: "自由辩里对方突然开始抓你方一个小失误不放，你会：",
+      options: [
+        {
+          label: "A",
+          text: "承认它小，然后立刻问这个小失误如何影响主判准。",
+          effects: { criterionSensitivity: 32, defensiveDissection: 24, emotionSpike: -12, riskPreference: -6 }
+        },
+        {
+          label: "B",
+          text: "反抓他们更大的不回应，用更高优先级的战场把它盖过去。",
+          effects: { attackPressure: 34, battlefieldControl: 20, impromptuCounter: 18, riskPreference: 10 }
+        },
+        {
+          label: "C",
+          text: "让队友先接，我负责在下一轮把完整回应补回结构里。",
+          effects: { teammateRelay: 30, frameworkModeling: 18, defensiveDissection: 16, emotionSpike: -8 }
+        },
+        {
+          label: "D",
+          text: "如果他们要一直追这个点，那就把它变成对方格局太小的证据。",
+          effects: { expressionImpact: 28, punchlineImpulse: 20, riskPreference: 16, memeDensity: 12 }
+        }
+      ]
+    },
+    {
+      id: "q021",
+      text: "你正在准备一场你不喜欢的持方，但它明显更好赢，你会：",
+      options: [
+        {
+          label: "A",
+          text: "赢比赛和喜欢持方是两回事，先把最优打法做出来。",
+          effects: { winObsession: 36, criterionSensitivity: 20, emotionSpike: -8, memeDensity: -8 }
+        },
+        {
+          label: "B",
+          text: "尽量找一个我能接受的价值入口，不然表达会没有灵魂。",
+          effects: { expressionImpact: 26, frameworkModeling: 20, logicPurity: 14, winObsession: -6 }
+        },
+        {
+          label: "C",
+          text: "把自己不舒服的部分列出来，提前做成对方可能攻击的预案。",
+          effects: { defensiveDissection: 28, reviewCompulsion: 22, logicPurity: 18, emotionSpike: -8 }
+        },
+        {
+          label: "D",
+          text: "边备赛边吐槽，但该找资料找资料，该上价值上价值。",
+          effects: { evidenceDependence: 20, memeDensity: 22, teammateRelay: 12, reviewCompulsion: 10 }
+        }
+      ]
+    },
+    {
+      id: "q022",
+      text: "评委在你陈词时突然皱眉，你脑内第一反应是：",
+      options: [
+        {
+          label: "A",
+          text: "刚才那句比较可能没递到，下一段要把判准说得更显眼。",
+          effects: { criterionSensitivity: 36, expressionImpact: 18, battlefieldControl: 14, emotionSpike: -6 }
+        },
+        {
+          label: "B",
+          text: "是不是链条跳了？先补中间环节，不然这段会被判成断言。",
+          effects: { logicPurity: 34, frameworkModeling: 18, defensiveDissection: 12, riskPreference: -8 }
+        },
+        {
+          label: "C",
+          text: "稳住，不被表情带走。继续按稿走完，场下再复盘。",
+          effects: { emotionSpike: -24, riskPreference: -12, reviewCompulsion: 18, battlefieldControl: 10 }
+        },
+        {
+          label: "D",
+          text: "提高表达强度，把这段讲得更像一个必须被听见的判断。",
+          effects: { expressionImpact: 32, punchlineImpulse: 16, winObsession: 12, riskPreference: 8 }
+        }
+      ]
+    },
+    {
+      id: "q023",
+      text: "新队员问你“辩论到底怎么赢”，你会怎么解释？",
+      options: [
+        {
+          label: "A",
+          text: "先讲比较：不是证明自己好，而是证明自己比对方更值得被投。",
+          effects: { criterionSensitivity: 34, frameworkModeling: 24, teammateRelay: 16, memeDensity: -6 }
+        },
+        {
+          label: "B",
+          text: "先讲论证链：主张、理由、例证、影响，少一个都容易塌。",
+          effects: { logicPurity: 34, evidenceDependence: 18, frameworkModeling: 16, punchlineImpulse: -8 }
+        },
+        {
+          label: "C",
+          text: "先让他看一轮自由辩。辩论不是念稿，是在现场处理活人。",
+          effects: { impromptuCounter: 30, attackPressure: 20, expressionImpact: 16, riskPreference: 10 }
+        },
+        {
+          label: "D",
+          text: "告诉他：赢法很多，但别先学会阴阳怪气再学会回应。",
+          effects: { teammateRelay: 24, memeDensity: 18, reviewCompulsion: 12, criterionSensitivity: 10 }
+        }
+      ]
+    },
+    {
+      id: "q024",
+      text: "你看到对方在自由辩中连续三次没有正面回答，你会：",
+      options: [
+        {
+          label: "A",
+          text: "把三次不回应串成一条线，直接告诉评委这是对方核心义务缺席。",
+          effects: { criterionSensitivity: 34, battlefieldControl: 24, attackPressure: 16, winObsession: 10 }
+        },
+        {
+          label: "B",
+          text: "继续追到他们回答为止。今天这个洞不填，谁也别走。",
+          effects: { attackPressure: 38, impromptuCounter: 20, emotionSpike: 18, riskPreference: 10 }
+        },
+        {
+          label: "C",
+          text: "先暂停追问，回头用结辩语言把不回应的影响讲清楚。",
+          effects: { battlefieldControl: 30, defensiveDissection: 20, expressionImpact: 12, emotionSpike: -8 }
+        },
+        {
+          label: "D",
+          text: "记在稿纸角落：对方疑似进入装死模式。",
+          effects: { memeDensity: 26, reviewCompulsion: 18, defensiveDissection: 12, punchlineImpulse: 12 }
+        }
+      ]
+    },
+    {
+      id: "q025",
+      text: "备赛群里突然没人说话了，你会怎么打破沉默？",
+      options: [
+        {
+          label: "A",
+          text: "发一版分工表：谁查资料、谁写稿、谁模拟，先让机器重新转起来。",
+          effects: { battlefieldControl: 32, teammateRelay: 24, reviewCompulsion: 12, memeDensity: -8 }
+        },
+        {
+          label: "B",
+          text: "发一个关键问题：这场我们到底靠哪个比较赢？",
+          effects: { frameworkModeling: 30, criterionSensitivity: 24, winObsession: 14, expressionImpact: -6 }
+        },
+        {
+          label: "C",
+          text: "丢一个离谱但可能有用的切入点，先把大家从僵尸状态里拽出来。",
+          effects: { punchlineImpulse: 28, memeDensity: 22, riskPreference: 18, teammateRelay: 10 }
+        },
+        {
+          label: "D",
+          text: "默默开始查资料，等群里复活时直接扔一份半成品。",
+          effects: { evidenceDependence: 32, reviewCompulsion: 18, teammateRelay: -8, emotionSpike: -6 }
+        }
+      ]
+    },
+    {
+      id: "q026",
+      text: "对方抛出一个你没听过的新概念，但听起来很高级，你会：",
+      options: [
+        {
+          label: "A",
+          text: "先问定义和适用范围。高级词不解释，就先当烟雾弹处理。",
+          effects: { attackPressure: 30, logicPurity: 28, defensiveDissection: 18, criterionSensitivity: 10 }
+        },
+        {
+          label: "B",
+          text: "把它放回原本比较框架：概念再新，也要回答本题怎么判。",
+          effects: { frameworkModeling: 32, criterionSensitivity: 28, battlefieldControl: 16, riskPreference: -8 }
+        },
+        {
+          label: "C",
+          text: "先记下来，不急着碰。等确认它真的影响战场再处理。",
+          effects: { defensiveDissection: 26, emotionSpike: -18, riskPreference: -12, reviewCompulsion: 10 }
+        },
+        {
+          label: "D",
+          text: "现场给它起个外号，方便队友和评委记住我们到底在打什么。",
+          effects: { memeDensity: 28, expressionImpact: 22, teammateRelay: 12, punchlineImpulse: 16 }
+        }
+      ]
+    },
+    {
+      id: "q027",
+      text: "你的队伍需要一个人熬夜收束全稿，你的真实状态是：",
+      options: [
+        {
+          label: "A",
+          text: "我来吧。大家把材料发我，明早给你们一个能上场的版本。",
+          effects: { teammateRelay: 34, battlefieldControl: 24, reviewCompulsion: 20, emotionSpike: -8 }
+        },
+        {
+          label: "B",
+          text: "可以，但我要先把框架钉死。没有框架的收稿只是排版。",
+          effects: { frameworkModeling: 34, logicPurity: 20, criterionSensitivity: 14, teammateRelay: 8 }
+        },
+        {
+          label: "C",
+          text: "我负责资料核验。别让我明天在场上被一个错数据杀死。",
+          effects: { evidenceDependence: 36, defensiveDissection: 16, reviewCompulsion: 18, riskPreference: -10 }
+        },
+        {
+          label: "D",
+          text: "我负责把难听的句子改成人话，顺便塞几个能活下来的金句。",
+          effects: { expressionImpact: 32, punchlineImpulse: 22, teammateRelay: 12, logicPurity: -6 }
+        }
+      ]
+    },
+    {
+      id: "q028",
+      text: "你最不能忍受队友出现哪种情况？",
+      options: [
+        {
+          label: "A",
+          text: "不回应。对方问题摆在那，你还在念自己的小作文。",
+          effects: { criterionSensitivity: 32, defensiveDissection: 20, emotionSpike: 12, teammateRelay: -8 }
+        },
+        {
+          label: "B",
+          text: "逻辑跳步。前提和结论隔着一条银河，还装作已经证明完了。",
+          effects: { logicPurity: 36, reviewCompulsion: 16, expressionImpact: -8, memeDensity: 8 }
+        },
+        {
+          label: "C",
+          text: "没有资料。全场都靠感觉，像在给评委讲都市传说。",
+          effects: { evidenceDependence: 34, winObsession: 12, logicPurity: 12, punchlineImpulse: -6 }
+        },
+        {
+          label: "D",
+          text: "完全不接队友。四个人像四个单独报名的灵魂。",
+          effects: { teammateRelay: 34, battlefieldControl: 18, emotionSpike: 10, attackPressure: -8 }
+        }
+      ]
+    },
+    {
+      id: "q029",
+      text: "你方优势很大，只要稳住就能赢，但你突然看到一个能爆杀对方的点，你会：",
+      options: [
+        {
+          label: "A",
+          text: "不打。稳赢局不要给自己制造新变量。",
+          effects: { riskPreference: -32, battlefieldControl: 24, criterionSensitivity: 16, emotionSpike: -12 }
+        },
+        {
+          label: "B",
+          text: "打，但只打一层，不恋战。让它变成加分项而不是新战场。",
+          effects: { attackPressure: 24, criterionSensitivity: 22, battlefieldControl: 18, riskPreference: 6 }
+        },
+        {
+          label: "C",
+          text: "必须打。优势局不补刀，等于给对方写遗嘱的时间。",
+          effects: { attackPressure: 36, winObsession: 24, riskPreference: 20, emotionSpike: 14 }
+        },
+        {
+          label: "D",
+          text: "留给结辩说，用最体面的方式把对方最后一口气收走。",
+          effects: { battlefieldControl: 30, expressionImpact: 22, defensiveDissection: 12, punchlineImpulse: 10 }
+        }
+      ]
+    },
+    {
+      id: "q030",
+      text: "如果要给自己的辩论风格写一句简介，你最接近哪句？",
+      options: [
+        {
+          label: "A",
+          text: "我负责让这场比赛有骨架，别让所有人漂在空中。",
+          effects: { frameworkModeling: 34, battlefieldControl: 20, logicPurity: 16, memeDensity: -8 }
+        },
+        {
+          label: "B",
+          text: "我负责让对方知道：每一个漏洞都会被现场认领。",
+          effects: { attackPressure: 36, impromptuCounter: 22, riskPreference: 16, emotionSpike: 8 }
+        },
+        {
+          label: "C",
+          text: "我负责让评委相信：我们不是声音大，我们是证据硬。",
+          effects: { evidenceDependence: 34, logicPurity: 22, criterionSensitivity: 14, expressionImpact: -6 }
+        },
+        {
+          label: "D",
+          text: "我负责让比赛结束后还有人记得这一场到底发生了什么。",
+          effects: { expressionImpact: 34, punchlineImpulse: 24, memeDensity: 18, battlefieldControl: 10 }
+        }
+      ]
     }
   ];
 
