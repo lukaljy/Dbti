@@ -154,7 +154,7 @@
       if (selectedIndex === undefined) return;
 
       const option = question.options[selectedIndex];
-      Object.entries(option.effects).forEach(([dimensionKey, delta]) => {
+      Object.entries(expandEffects(option.effects)).forEach(([dimensionKey, delta]) => {
         if (!(dimensionKey in scores)) return;
         scores[dimensionKey] = clamp(scores[dimensionKey] + delta, 0, 100);
         touched[dimensionKey] += 1;
@@ -203,16 +203,19 @@
   }
 
   function computeDisplayScores(scores) {
-    const primaryWeight = data.config.displayPrimaryWeight;
-    const secondaryWeight = 1 - primaryWeight;
     const displayScores = {};
 
     data.displayDimensions.forEach((dimension) => {
       const primaryValue = scores[dimension.primary] ?? 50;
       const secondaryValue = scores[dimension.secondary] ?? 50;
-      displayScores[dimension.key] = Math.round(
-        primaryValue * primaryWeight + secondaryValue * secondaryWeight
-      );
+      const average = (primaryValue + secondaryValue) / 2;
+
+      if (dimension.key === "competitive_orientation") {
+        displayScores[dimension.key] = Math.round(Math.min(primaryValue, secondaryValue) * 0.7 + average * 0.3);
+        return;
+      }
+
+      displayScores[dimension.key] = Math.round(average);
     });
 
     return displayScores;
@@ -248,11 +251,29 @@
   }
 
   function renderEffectChips(effects) {
-    return Object.entries(effects).map(([key, value]) => {
+    return Object.entries(expandEffects(effects)).map(([key, value]) => {
       const className = value >= 0 ? "score-chip is-positive" : "score-chip is-negative";
       const sign = value >= 0 ? "+" : "";
       return `<span class="${className}">${dimensionLabels[key] || key} ${sign}${value}</span>`;
     }).join("");
+  }
+
+  function expandEffects(effects) {
+    const expanded = {};
+
+    Object.entries(effects).forEach(([sourceKey, value]) => {
+      const transform = data.effectTransforms?.[sourceKey] || { [sourceKey]: 1 };
+      Object.entries(transform).forEach(([targetKey, weight]) => {
+        expanded[targetKey] = (expanded[targetKey] || 0) + value * weight;
+      });
+    });
+
+    return Object.fromEntries(
+      Object.entries(expanded)
+        .filter(([key]) => dimensionKeys.includes(key))
+        .map(([key, value]) => [key, Math.round(value)])
+        .filter(([, value]) => value !== 0)
+    );
   }
 
   function drawRadarChart(displayScores) {
