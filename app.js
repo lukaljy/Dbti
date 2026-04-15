@@ -1,9 +1,6 @@
 (() => {
   const data = window.DBTI_DATA;
   const dimensionKeys = data.internalDimensions.map((dimension) => dimension.key);
-  const dimensionLabels = Object.fromEntries(
-    data.internalDimensions.map((dimension) => [dimension.key, dimension.label])
-  );
 
   const likertOptions = [
     ["A", "非常不符合我"],
@@ -30,7 +27,8 @@
     result: null,
     questionModes: [],
     questionModeKey: null,
-    questionModeStatus: "loading"
+    questionModeStatus: "loading",
+    activeQuestions: []
   };
 
   const $ = (selector) => document.querySelector(selector);
@@ -39,11 +37,7 @@
     startScreen: $("#start-screen"),
     quizScreen: $("#quiz-screen"),
     resultScreen: $("#result-screen"),
-    typesScreen: $("#types-screen"),
-    dimensionsScreen: $("#dimensions-screen"),
     startButton: $("#start-btn"),
-    typesButton: $("#types-btn"),
-    dimensionsButton: $("#dimensions-btn"),
     modeSwitch: $("#mode-switch"),
     modeDesc: $("#mode-desc"),
     nextButton: $("#next-btn"),
@@ -63,17 +57,13 @@
     resultSecondary: $("#result-secondary"),
     radarChart: $("#radar-chart"),
     dimensionList: $("#dimension-list"),
-    shareText: $("#share-text"),
-    typeList: $("#type-list"),
-    dimensionLibrary: $("#dimension-library")
+    shareText: $("#share-text")
   };
 
   const screens = [
     elements.startScreen,
     elements.quizScreen,
-    elements.resultScreen,
-    elements.typesScreen,
-    elements.dimensionsScreen
+    elements.resultScreen
   ].filter(Boolean);
 
   function init() {
@@ -84,16 +74,10 @@
     elements.nextButton.addEventListener("click", goNext);
     elements.restartButton.addEventListener("click", restartTest);
     elements.copyButton.addEventListener("click", copyShareText);
-    elements.typesButton.addEventListener("click", () => showScreen("types"));
-    elements.dimensionsButton.addEventListener("click", () => showScreen("dimensions"));
-    document.querySelectorAll("[data-back-home]").forEach((button) => {
-      button.addEventListener("click", () => showScreen("start"));
-    });
     window.addEventListener("resize", () => {
       if (state.result) drawRadarChart(state.result.displayScores);
     });
 
-    renderReferencePages();
     renderModeButtons();
     loadQuestionModes();
   }
@@ -173,6 +157,12 @@
       const scoreMatch = line.match(/^-\s+分数：(.+)$/);
       if (scoreMatch && currentOption) {
         currentOption.effects = parseWeightedScoreLine(scoreMatch[1]);
+        return;
+      }
+
+      const hiddenMatch = line.match(/^-\s+隐藏人格：([a-z_]+)$/);
+      if (hiddenMatch && currentOption) {
+        currentOption.hiddenTypeKey = hiddenMatch[1];
       }
     });
 
@@ -319,6 +309,22 @@
     return state.questionModes.find((mode) => mode.key === state.questionModeKey) || state.questionModes[0] || null;
   }
 
+  function currentQuestions() {
+    const mode = currentMode();
+    return state.activeQuestions.length > 0 ? state.activeQuestions : mode?.questions || [];
+  }
+
+  function shuffleQuestions(questions) {
+    const shuffled = [...questions];
+
+    for (let index = shuffled.length - 1; index > 0; index -= 1) {
+      const randomIndex = Math.floor(Math.random() * (index + 1));
+      [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];
+    }
+
+    return shuffled;
+  }
+
   function showScreen(screenName) {
     const target = elements[`${screenName}Screen`];
     screens.forEach((screen) => {
@@ -334,6 +340,7 @@
     state.answers = {};
     state.selectedOptionIndex = null;
     state.result = null;
+    state.activeQuestions = mode.shuffleOnStart ? shuffleQuestions(mode.questions) : [...mode.questions];
     renderQuestion();
     showScreen("quiz");
   }
@@ -344,7 +351,7 @@
 
   function renderQuestion() {
     const mode = currentMode();
-    const questions = mode.questions;
+    const questions = currentQuestions();
     const question = questions[state.currentQuestionIndex];
     const questionNumber = state.currentQuestionIndex + 1;
     const total = questions.length;
@@ -366,12 +373,11 @@
       const selected = index === state.selectedOptionIndex ? " is-selected" : "";
       return `
         <button class="option-button${selected}" type="button" data-option-index="${index}">
-          <span class="option-label">${escapeHtml(option.label)}</span>
-          <span class="option-content">
-            <span class="option-text">${escapeHtml(option.text)}</span>
-            <span class="score-chips">${renderEffectChips(option.effects, mode)}</span>
-          </span>
-        </button>
+            <span class="option-label">${escapeHtml(option.label)}</span>
+            <span class="option-content">
+              <span class="option-text">${escapeHtml(option.text)}</span>
+            </span>
+          </button>
       `;
     }).join("");
 
@@ -381,8 +387,7 @@
   }
 
   function selectOption(optionIndex) {
-    const mode = currentMode();
-    const question = mode.questions[state.currentQuestionIndex];
+    const question = currentQuestions()[state.currentQuestionIndex];
     state.selectedOptionIndex = optionIndex;
     state.answers[question.id] = optionIndex;
     renderQuestion();
@@ -390,7 +395,7 @@
 
   function goNext() {
     const mode = currentMode();
-    const questions = mode.questions;
+    const questions = currentQuestions();
     if (state.selectedOptionIndex === null) return;
 
     const isLastQuestion = state.currentQuestionIndex === questions.length - 1;
@@ -409,6 +414,20 @@
 
   function computeResult() {
     const mode = currentMode();
+    const hiddenType = findHiddenType();
+    if (hiddenType) {
+      const scores = Object.fromEntries(dimensionKeys.map((key) => [key, 50]));
+      return {
+        mode,
+        isHidden: true,
+        scores,
+        touched: Object.fromEntries(dimensionKeys.map((key) => [key, 0])),
+        primary: { ...hiddenType, similarity: 100 },
+        secondary: null,
+        displayScores: computeDisplayScores(scores)
+      };
+    }
+
     const scoringResult = mode.scoring === "likertScale"
       ? computeLikertScores(mode)
       : computeWeightedScores(mode);
@@ -431,11 +450,26 @@
     };
   }
 
+  function findHiddenType() {
+    for (const question of currentQuestions()) {
+      const selectedIndex = state.answers[question.id];
+      if (selectedIndex === undefined) continue;
+
+      const option = question.options[selectedIndex];
+      const hiddenTypeKey = option?.hiddenTypeKey;
+      if (hiddenTypeKey && data.hiddenPersonalityTypes?.[hiddenTypeKey]) {
+        return data.hiddenPersonalityTypes[hiddenTypeKey];
+      }
+    }
+
+    return null;
+  }
+
   function computeWeightedScores(mode) {
     const scores = Object.fromEntries(dimensionKeys.map((key) => [key, 50]));
     const touched = Object.fromEntries(dimensionKeys.map((key) => [key, 0]));
 
-    mode.questions.forEach((question) => {
+    currentQuestions().forEach((question) => {
       const selectedIndex = state.answers[question.id];
       if (selectedIndex === undefined) return;
 
@@ -454,7 +488,7 @@
     const totals = Object.fromEntries(dimensionKeys.map((key) => [key, 0]));
     const touched = Object.fromEntries(dimensionKeys.map((key) => [key, 0]));
 
-    mode.questions.forEach((question) => {
+    currentQuestions().forEach((question) => {
       const selectedIndex = state.answers[question.id];
       if (selectedIndex === undefined) return;
 
@@ -526,8 +560,10 @@
     elements.resultName.textContent = primary.name;
     elements.resultTagline.textContent = primary.tagline;
     elements.resultDescription.textContent = description;
-    elements.resultMatch.textContent = `${primary.similarity}%`;
-    elements.resultSecondary.textContent = secondary
+    elements.resultMatch.textContent = result.isHidden ? "隐藏" : `${primary.similarity}%`;
+    elements.resultSecondary.textContent = result.isHidden
+      ? `测试模式：${result.mode.label}｜隐藏人格触发`
+      : secondary
       ? `测试模式：${result.mode.label}｜相似人格：${secondary.name} · ${secondary.similarity}%`
       : `测试模式：${result.mode.label}`;
     elements.shareText.textContent = shareText;
@@ -541,20 +577,6 @@
           <strong>${score}</strong>
         </div>
       `;
-    }).join("");
-  }
-
-  function renderEffectChips(effects, mode) {
-    const displayEffects = mode.scoring === "likertScale" ? effects : expandEffects(effects);
-
-    return Object.entries(displayEffects || {}).filter(([key]) => dimensionKeys.includes(key)).map(([key, value]) => {
-      if (mode.scoring === "likertScale") {
-        return `<span class="score-chip is-neutral">${escapeHtml(dimensionLabels[key] || key)} ${Math.round(value)}分</span>`;
-      }
-
-      const className = value >= 0 ? "score-chip is-positive" : "score-chip is-negative";
-      const sign = value >= 0 ? "+" : "";
-      return `<span class="${className}">${escapeHtml(dimensionLabels[key] || key)} ${sign}${value}</span>`;
     }).join("");
   }
 
@@ -574,80 +596,6 @@
         .map(([key, value]) => [key, Math.round(value)])
         .filter(([, value]) => value !== 0)
     );
-  }
-
-  function renderReferencePages() {
-    renderTypeLibrary();
-    renderDimensionLibrary();
-  }
-
-  function renderTypeLibrary() {
-    if (!elements.typeList) return;
-
-    elements.typeList.innerHTML = data.personalityTypes.map((type, index) => {
-      const chips = Object.entries(type.profile)
-        .filter(([key]) => dimensionKeys.includes(key))
-        .sort((a, b) => Math.abs(b[1] - 50) - Math.abs(a[1] - 50))
-        .slice(0, 6)
-        .map(([key, value]) => `<span class="profile-chip">${escapeHtml(dimensionLabels[key] || key)} ${Math.round(value)}</span>`)
-        .join("");
-
-      return `
-        <article class="type-card">
-          <div class="card-kicker">${String(index + 1).padStart(2, "0")} · ${escapeHtml(type.code)}</div>
-          <h3>${escapeHtml(type.name)}</h3>
-          <p class="card-tagline">${escapeHtml(type.tagline)}</p>
-          <div class="profile-chips">${chips}</div>
-        </article>
-      `;
-    }).join("");
-  }
-
-  function renderDimensionLibrary() {
-    if (!elements.dimensionLibrary) return;
-
-    const internalCards = data.internalDimensions.map((dimension) => {
-      const detail = data.dimensionDetails?.[dimension.key] || {};
-      return `
-        <article class="dimension-card">
-          <div class="card-kicker">${escapeHtml(dimension.key)}</div>
-          <h3>${escapeHtml(dimension.label)}</h3>
-          <p><strong>高分：</strong>${escapeHtml(detail.high || "更靠近该维度高分端。")}</p>
-          <p><strong>低分：</strong>${escapeHtml(detail.low || "更靠近该维度低分端。")}</p>
-        </article>
-      `;
-    }).join("");
-
-    const displayCards = data.displayDimensions.map((dimension) => `
-      <article class="dimension-card">
-        <div class="card-kicker">${escapeHtml(dimension.key)}</div>
-        <h3>${escapeHtml(dimension.label)}</h3>
-        <p><strong>合成：</strong>${escapeHtml(describeDisplayFormula(dimension))}</p>
-        <p>结果页雷达图展示该合成维度，底层匹配仍使用 16 个维度。</p>
-      </article>
-    `).join("");
-
-    elements.dimensionLibrary.innerHTML = `
-      <section class="dimension-section">
-        <h3>16 个底层维度</h3>
-        <div class="dimension-grid-large">${internalCards}</div>
-      </section>
-      <section class="dimension-section">
-        <h3>8 个展示维度</h3>
-        <div class="dimension-grid-large">${displayCards}</div>
-      </section>
-    `;
-  }
-
-  function describeDisplayFormula(dimension) {
-    const primaryLabel = dimensionLabels[dimension.primary] || dimension.primary;
-    const secondaryLabel = dimensionLabels[dimension.secondary] || dimension.secondary;
-
-    if (dimension.key === "competitive_orientation") {
-      return `min(${primaryLabel}, ${secondaryLabel}) * 0.7 + 平均值 * 0.3`;
-    }
-
-    return `${primaryLabel} 与 ${secondaryLabel} 简单平均`;
   }
 
   function drawRadarChart(displayScores) {
