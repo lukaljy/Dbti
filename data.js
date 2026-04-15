@@ -51,8 +51,8 @@
   const questionModeSources = [
     {
       key: "profile35",
-      label: "35题人格题",
-      badge: "35 QUESTIONS",
+      label: "36题人格题",
+      badge: "36 QUESTIONS",
       description: "四选一情境题，直接按选项给多个底层维度加减分，更适合快速试玩人格结果。",
       file: "问题文档.md",
       parser: "weightedOptions"
@@ -1184,7 +1184,7 @@
   window.DBTI_DATA = {
     config: {
       demoMode: true,
-      assetVersion: "20260413-question-modes",
+      assetVersion: "20260415-question-doc-scores",
       fallbackThreshold: 60
     },
     internalDimensions,
