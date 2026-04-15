@@ -53,7 +53,7 @@
       key: "profile35",
       label: "37题人格题",
       badge: "37 QUESTIONS",
-      description: "四选一情境题，直接按选项给多个底层维度加减分，更适合快速试玩人格结果。",
+      description: "四选一情境题，直接按选项给多个底层维度加减分，更适合快速体验人格结果。",
       file: "问题文档.md",
       parser: "weightedOptions"
     },
@@ -61,7 +61,7 @@
       key: "scale80",
       label: "80题量表题",
       badge: "80 QUESTIONS",
-      description: "五级量表题，每个底层维度 5 题，按正反向均分换算为 0-100，更适合精细调试维度。",
+      description: "五级量表题，每个底层维度 5 题，按正反向均分换算为 0-100，更适合精细查看维度。",
       file: "问题文档-80题.md",
       parser: "likertScale",
       shuffleOnStart: true
@@ -1206,8 +1206,8 @@
 
   window.DBTI_DATA = {
     config: {
-      demoMode: true,
-      assetVersion: "20260415-hidden-random",
+      demoMode: false,
+      assetVersion: "20260415-release",
       fallbackThreshold: 60
     },
     internalDimensions,
