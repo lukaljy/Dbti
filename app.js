@@ -68,6 +68,7 @@
     questionModeStatus: "loading",
     activeQuestions: [],
     shareImageBlob: null,
+    shareImageDataUrl: "",
     shareImageUrl: null,
     shareImageName: "dbti-result.png"
   };
@@ -125,6 +126,7 @@
     elements.copyButton.addEventListener("click", copyShareText);
     elements.imageButton.addEventListener("click", openShareImageDialog);
     elements.shareImageClose.addEventListener("click", closeShareImageDialog);
+    elements.downloadImageLink.addEventListener("click", handleDownloadImageClick);
     elements.systemShareButton.addEventListener("click", shareGeneratedImage);
     elements.shareImageOverlay.addEventListener("click", (event) => {
       if (event.target === elements.shareImageOverlay) closeShareImageDialog();
@@ -873,8 +875,8 @@
     elements.imageButton.textContent = "生成中";
 
     try {
-      const blob = await createShareImageBlob(state.result);
-      setShareImageBlob(blob, state.result);
+      const image = await createShareImage(state.result);
+      setShareImageData(image, state.result);
       elements.shareImageOverlay.hidden = false;
       document.body.classList.add("is-dialog-open");
     } catch (error) {
@@ -897,22 +899,38 @@
     document.body.classList.remove("is-dialog-open");
   }
 
-  function setShareImageBlob(blob, result) {
+  function setShareImageData(image, result) {
     if (state.shareImageUrl) URL.revokeObjectURL(state.shareImageUrl);
 
     const fileName = `DBTI-${sanitizeFileName(result.primary.name)}.png`;
+    const blob = image.blob || dataUrlToBlob(image.dataUrl);
     const imageUrl = URL.createObjectURL(blob);
+    const isWechat = isWeChatBrowser();
 
     state.shareImageBlob = blob;
+    state.shareImageDataUrl = image.dataUrl;
     state.shareImageUrl = imageUrl;
     state.shareImageName = fileName;
-    elements.shareImagePreview.src = imageUrl;
-    elements.downloadImageLink.href = imageUrl;
+    elements.shareImagePreview.src = image.dataUrl;
+    elements.downloadImageLink.href = isWechat ? image.dataUrl : imageUrl;
     elements.downloadImageLink.download = fileName;
+    elements.downloadImageLink.textContent = isWechat ? "长按上方图片保存" : "保存图片";
 
     const canShare = canShareGeneratedImage();
     elements.systemShareButton.disabled = !canShare;
-    elements.systemShareButton.textContent = canShare ? "系统分享图片" : "长按图片保存";
+    elements.systemShareButton.textContent = canShare
+      ? "系统分享图片"
+      : isWechat
+      ? "微信内长按保存"
+      : "长按图片保存";
+  }
+
+  function handleDownloadImageClick(event) {
+    if (!isWeChatBrowser()) return;
+
+    event.preventDefault();
+    elements.downloadImageLink.textContent = "请长按图片保存";
+    elements.shareImagePreview.scrollIntoView({ block: "center", behavior: "smooth" });
   }
 
   async function shareGeneratedImage() {
@@ -962,15 +980,38 @@
     }
   }
 
-  function createShareImageBlob(result) {
+  function createShareImage(result) {
     const canvas = createShareImageCanvas(result);
+    const dataUrl = canvas.toDataURL("image/png", 0.94);
 
-    return new Promise((resolve, reject) => {
+    if (!canvas.toBlob) {
+      return Promise.resolve({ blob: dataUrlToBlob(dataUrl), dataUrl });
+    }
+
+    return new Promise((resolve) => {
       canvas.toBlob((blob) => {
-        if (blob) resolve(blob);
-        else reject(new Error("canvas.toBlob returned empty blob"));
+        if (blob) resolve({ blob, dataUrl });
+        else resolve({ blob: dataUrlToBlob(dataUrl), dataUrl });
       }, "image/png", 0.94);
     });
+  }
+
+  function dataUrlToBlob(dataUrl) {
+    const [meta, content] = dataUrl.split(",");
+    const mimeMatch = meta.match(/data:(.*?);base64/);
+    const mime = mimeMatch?.[1] || "image/png";
+    const binary = atob(content);
+    const bytes = new Uint8Array(binary.length);
+
+    for (let index = 0; index < binary.length; index += 1) {
+      bytes[index] = binary.charCodeAt(index);
+    }
+
+    return new Blob([bytes], { type: mime });
+  }
+
+  function isWeChatBrowser() {
+    return /MicroMessenger/i.test(navigator.userAgent || "");
   }
 
   function createShareImageCanvas(result) {
