@@ -976,7 +976,7 @@
   function createShareImageCanvas(result) {
     const canvas = document.createElement("canvas");
     const width = 1080;
-    const height = 2048;
+    const height = 1800;
     const ctx = canvas.getContext("2d");
 
     canvas.width = width;
@@ -991,12 +991,15 @@
     const teammateName = teammate?.type?.name || "暂未生成";
     const matchText = result.isHidden ? "隐藏" : `${primary.similarity}%`;
     const bodyFont = "'Microsoft YaHei', 'PingFang SC', 'Noto Sans SC', sans-serif";
-    const cardX = 60;
-    const cardY = 60;
+    const cardX = 52;
+    const cardY = 52;
     const cardWidth = width - cardX * 2;
     const cardHeight = height - cardY * 2;
-    const contentX = cardX + 54;
-    const contentWidth = cardWidth - 108;
+    const contentX = cardX + 56;
+    const contentWidth = cardWidth - 112;
+
+    ctx.textAlign = "left";
+    ctx.textBaseline = "top";
 
     const background = ctx.createLinearGradient(0, 0, width, height);
     background.addColorStop(0, "#230811");
@@ -1013,42 +1016,42 @@
     ctx.globalAlpha = 0.08;
     ctx.fillStyle = "#f4ead7";
     ctx.font = `900 210px ${bodyFont}`;
-    ctx.fillText("DBTI", 474, 1970);
+    ctx.fillText("DBTI", 474, 1662);
     ctx.restore();
 
-    fillRoundRect(ctx, cardX, cardY, cardWidth, cardHeight, 44, "rgba(244, 234, 215, 0.085)");
-    strokeRoundRect(ctx, cardX, cardY, cardWidth, cardHeight, 44, "rgba(244, 234, 215, 0.24)", 2);
+    fillRoundRect(ctx, cardX, cardY, cardWidth, cardHeight, 42, "rgba(244, 234, 215, 0.085)");
+    strokeRoundRect(ctx, cardX, cardY, cardWidth, cardHeight, 42, "rgba(244, 234, 215, 0.24)", 2);
 
-    let y = cardY + 56;
+    let y = cardY + 58;
     drawSharePill(ctx, contentX, y, "DBTI RESULT", bodyFont, "#ffe77a", "rgba(255, 231, 122, 0.12)");
-    drawSharePill(ctx, contentX + 230, y, result.mode.label, bodyFont, "#f4ead7", "rgba(244, 234, 215, 0.1)");
+    drawSharePill(ctx, contentX + 232, y, result.mode.label, bodyFont, "#f4ead7", "rgba(244, 234, 215, 0.1)");
 
-    y += 82;
+    y += 78;
     ctx.fillStyle = "#ffe77a";
     ctx.font = `700 26px ${bodyFont}`;
     ctx.fillText("华语辩论人格测试", contentX, y);
 
-    y += 54;
+    y += 50;
     drawSharePill(ctx, contentX, y, primary.code, bodyFont, "#ffb0a6", "rgba(232, 64, 64, 0.18)");
 
-    y += 74;
+    y += 66;
     ctx.fillStyle = "#f4ead7";
-    ctx.font = `900 76px ${bodyFont}`;
-    y = drawWrappedCanvasText(ctx, primary.name, contentX, y, contentWidth, 88, 2);
+    ctx.font = `900 82px ${bodyFont}`;
+    y = drawWrappedCanvasText(ctx, primary.name, contentX, y, contentWidth, 86, 2);
 
-    y += 18;
+    y += 14;
     ctx.fillStyle = "#ffe77a";
-    ctx.font = `700 34px ${bodyFont}`;
-    y = drawWrappedCanvasText(ctx, primary.tagline, contentX, y, contentWidth, 50, 2);
+    ctx.font = `700 35px ${bodyFont}`;
+    y = drawWrappedCanvasText(ctx, primary.tagline, contentX, y, contentWidth, 46, 2);
 
-    y += 34;
+    y += 30;
     const statY = y;
-    drawShareMetric(ctx, contentX, statY, 230, 120, "匹配度", matchText, bodyFont);
-    drawShareMetric(ctx, contentX + 254, statY, contentWidth - 254, 120, "最适合的队友", teammateName, bodyFont);
+    drawShareMetric(ctx, contentX, statY, 230, 112, "匹配度", matchText, bodyFont);
+    drawShareMetric(ctx, contentX + 254, statY, contentWidth - 254, 112, "最适合的队友", teammateName, bodyFont);
 
-    y += 166;
-    fillRoundRect(ctx, contentX, y, contentWidth, 132, 26, "rgba(0, 0, 0, 0.18)");
-    strokeRoundRect(ctx, contentX, y, contentWidth, 132, 26, "rgba(255, 231, 122, 0.22)", 1);
+    y += 148;
+    fillRoundRect(ctx, contentX, y, contentWidth, 126, 24, "rgba(0, 0, 0, 0.18)");
+    strokeRoundRect(ctx, contentX, y, contentWidth, 126, 24, "rgba(255, 231, 122, 0.22)", 1);
     ctx.fillStyle = "rgba(244, 234, 215, 0.82)";
     ctx.font = `500 28px ${bodyFont}`;
     drawWrappedCanvasText(
@@ -1057,17 +1060,17 @@
         ? `队友推荐：${teammate.reason}`
         : "队友推荐：当前结果不足以稳定推荐队友。",
       contentX + 30,
-      y + 28,
+      y + 24,
       contentWidth - 60,
       38,
       2
     );
 
-    const radarCenterY = Math.max(y + 390, 1140);
-    const dimensionGridY = radarCenterY + 330;
-    const footerY = dimensionGridY + 330;
+    const radarCenterY = Math.max(y + 330, 1010);
+    const dimensionGridY = radarCenterY + 286;
+    const footerY = dimensionGridY + 310;
 
-    drawShareRadar(ctx, result.displayScores, width / 2, radarCenterY, 200, bodyFont);
+    drawShareRadar(ctx, result.displayScores, width / 2, radarCenterY, 176, bodyFont);
     drawShareDimensionGrid(ctx, result.displayScores, contentX, dimensionGridY, contentWidth, bodyFont);
 
     ctx.fillStyle = "rgba(244, 234, 215, 0.68)";
@@ -1089,15 +1092,22 @@
   }
 
   function drawSharePill(ctx, x, y, text, fontFamily, color, background) {
+    ctx.save();
     ctx.font = `700 24px ${fontFamily}`;
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
     const width = Math.ceil(ctx.measureText(text).width) + 42;
     fillRoundRect(ctx, x, y, width, 46, 23, background);
     strokeRoundRect(ctx, x, y, width, 46, 23, "rgba(255, 231, 122, 0.34)", 1);
     ctx.fillStyle = color;
-    ctx.fillText(text, x + 21, y + 12);
+    ctx.fillText(text, x + 21, y + 23);
+    ctx.restore();
   }
 
   function drawShareMetric(ctx, x, y, width, height, label, value, fontFamily) {
+    ctx.save();
+    ctx.textAlign = "left";
+    ctx.textBaseline = "top";
     fillRoundRect(ctx, x, y, width, height, 24, "rgba(244, 234, 215, 0.09)");
     strokeRoundRect(ctx, x, y, width, height, 24, "rgba(244, 234, 215, 0.18)", 1);
     ctx.fillStyle = "rgba(174, 184, 198, 0.98)";
@@ -1105,7 +1115,8 @@
     ctx.fillText(label, x + 26, y + 24);
     ctx.fillStyle = "#ffe77a";
     ctx.font = `900 42px ${fontFamily}`;
-    drawWrappedCanvasText(ctx, value, x + 26, y + 62, width - 52, 46, 1);
+    drawWrappedCanvasText(ctx, value, x + 26, y + 58, width - 52, 46, 1);
+    ctx.restore();
   }
 
   function drawShareRadar(ctx, displayScores, centerX, centerY, radius, fontFamily) {
@@ -1175,6 +1186,9 @@
   }
 
   function drawShareDimensionGrid(ctx, displayScores, x, y, width, fontFamily) {
+    ctx.save();
+    ctx.textAlign = "left";
+    ctx.textBaseline = "top";
     const columns = 2;
     const gap = 18;
     const itemWidth = (width - gap) / columns;
@@ -1197,6 +1211,7 @@
       ctx.fillText(String(displayScores[dimension.key] ?? 0), itemX + itemWidth - 22, itemY + 19);
       ctx.textAlign = "left";
     });
+    ctx.restore();
   }
 
   function drawWrappedCanvasText(ctx, text, x, y, maxWidth, lineHeight, maxLines = Infinity) {

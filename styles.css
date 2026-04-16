@@ -592,7 +592,7 @@ h2 {
 
 .share-image-dialog {
   width: min(100%, 520px);
-  max-height: min(92vh, 860px);
+  max-height: min(92dvh, 860px);
   border: 1px solid var(--line);
   border-radius: 28px;
   padding: 22px;
@@ -633,9 +633,13 @@ h2 {
 
 .share-image-preview {
   display: block;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
+  max-height: min(68dvh, 700px);
+  margin: 0 auto;
   border: 1px solid rgba(255, 231, 122, 0.24);
   border-radius: 22px;
+  object-fit: contain;
   background: rgba(0, 0, 0, 0.2);
 }
 
@@ -666,6 +670,35 @@ h2 {
 @media (max-width: 780px) {
   .app-shell {
     padding: 16px;
+  }
+
+  .share-image-overlay {
+    align-items: start;
+    padding:
+      max(10px, env(safe-area-inset-top))
+      10px
+      max(10px, env(safe-area-inset-bottom));
+  }
+
+  .share-image-dialog {
+    max-height: calc(100dvh - 20px);
+    border-radius: 22px;
+    padding: 14px;
+  }
+
+  .share-image-header {
+    gap: 10px;
+  }
+
+  .share-image-tip {
+    margin: 10px 0 12px;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .share-image-preview {
+    max-height: 58dvh;
+    border-radius: 18px;
   }
 
   .screen {

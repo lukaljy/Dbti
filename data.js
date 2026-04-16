@@ -1207,7 +1207,7 @@
   window.DBTI_DATA = {
     config: {
       demoMode: false,
-      assetVersion: "20260416-share-image",
+      assetVersion: "20260416-share-image-fit",
       fallbackThreshold: 60
     },
     internalDimensions,
